@@ -31,7 +31,7 @@ namespace API.Controllers
         public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await _db.users.FindAsync(id);
-            
+
             return user;
         }
     }
