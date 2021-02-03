@@ -10,6 +10,8 @@ import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { ToastrModule } from 'ngx-toastr';
+import { UserOffersComponent } from './user-offers/user-offers.component';
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserOffersComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,10 @@ import { RegisterComponent } from './register/register.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot(
+      {positionClass: 'toast-bottom-left'}
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

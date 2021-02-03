@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr.css';
+@import '~font-awesome/css/font-awesome.css';
+
+body{
+    background-image: url(./app/_img/background_web.png);
+}

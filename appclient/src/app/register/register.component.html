@@ -1,9 +1,9 @@
 <div class="conteinter">
     <div class="row justify-content-center">
-        <div class="col-5 mt-5">
+        <div class="col-5 mt-4">
             <h2 class="text-center">Registration</h2>
     <form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
-        <div class="form-control">
+        <div class="form-control p-4">
             <div class="form-group">
                 <label for="firstName">First name</label>
                 <input id="firstName" name="firstName" [(ngModel)]="model.firstName" class="form-control" type="text" placeholder="First name">
