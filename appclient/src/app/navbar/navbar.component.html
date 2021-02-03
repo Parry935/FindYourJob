@@ -9,10 +9,13 @@
           <a class="nav-link" routerLink='/register'>Rejestracja</a>
         </li>
         <li class="nav-item" *ngIf="accountService.currentUser$ | async">
-          <a class="nav-link" href="#2">Dodaj ofertę</a>
+          <a class="nav-link" href="#2">Moje aplikacje</a>
         </li>
         <li class="nav-item" *ngIf="accountService.currentUser$ | async">
-          <a class="nav-link" href="#3">Moje oferty</a>
+          <a class="nav-link" href="#3">Dodaj ofertę</a>
+        </li>
+        <li class="nav-item" *ngIf="accountService.currentUser$ | async">
+          <a class="nav-link" href="#4">Moje oferty</a>
         </li>
       </ul>
 
