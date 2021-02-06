@@ -14,12 +14,12 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly AppDbContext _db;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ITokenService _tokenService;
 
-        public AccountController(AppDbContext db, ITokenService tokenService)
+        public AccountController(IUnitOfWork unitOfWork, ITokenService tokenService)
         {
-            _db= db;
+            _unitOfWork= unitOfWork;
             _tokenService = tokenService;
         }
 
@@ -44,8 +44,8 @@ namespace API.Controllers
             };
 
 
-            _db.users.Add(user);
-            await _db.SaveChangesAsync();
+            _unitOfWork.UserRepository.Add(user);
+            await _unitOfWork.Complete();
 
             return new UserDto
             {
@@ -57,7 +57,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(UserLoginDto userLoginDto)
         {
-            var user = await _db.users.SingleOrDefaultAsync(m=>m.Email == userLoginDto.Email);
+            var user = await _unitOfWork.UserRepository.GetUserByEmailAsync(userLoginDto.Email);
 
             if(user == null)
             {
@@ -81,9 +81,13 @@ namespace API.Controllers
             };
         }
 
-        private async Task<bool>UserExists(string Email)
+        private async Task<bool>UserExists(string email)
         {
-            return await _db.users.AnyAsync(m=>m.Email == Email.ToLower());
+            var user = await _unitOfWork.UserRepository.GetUserByEmailAsync(email);
+            if(user == null)
+                return false;
+
+            return true;
         }
     }
 }
